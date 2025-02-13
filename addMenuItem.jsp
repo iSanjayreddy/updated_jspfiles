@@ -13,42 +13,67 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
-      background: #fdf6e3;
+      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
       font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
     .card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
       border: none;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      animation: fadeInUp 0.6s ease-out;
     }
     .card-header {
-      background-color: #e74c3c;
-      color: #fff;
       text-align: center;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #ff9800;
     }
     .form-label {
       font-weight: 500;
+      color: #ffcc80;
+    }
+    .form-control {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: #fff;
+      transition: all 0.3s ease-in-out;
+    }
+    .form-control:focus {
+      background: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 10px #ff9800;
     }
     .btn-primary {
-      background-color: #e67e22;
+      background: #ff9800;
       border: none;
+      font-size: 1.1rem;
+      transition: all 0.3s ease-in-out;
     }
     .btn-primary:hover {
-      background-color: #d35400;
+      background: #e65100;
+      box-shadow: 0 0 15px #ff9800;
     }
     .back-link {
       text-decoration: none;
-      color: #e67e22;
+      color: #ffcc80;
       font-weight: 500;
+      transition: 0.3s;
     }
     .back-link:hover {
-      color: #d35400;
+      color: #ff9800;
+      text-shadow: 0 0 8px #ff9800;
     }
   </style>
 </head>
 <body>
-  <div class="container my-5">
+  <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-6">
         <div class="card animate__animated animate__fadeInUp">
