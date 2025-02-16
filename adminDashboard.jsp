@@ -5,132 +5,154 @@
   <meta charset="UTF-8">
   <title>Admin Dashboard - Korporate Kitchen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Animate.css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      background: #f8f8f8;
+    :root {
+      --primary-color: #ff6b6b;
+      --secondary-color: #4ecdc4;
+      --dark-color: #2d3436;
+      --glass-bg: rgba(255, 255, 255, 0.95);
     }
-    /* Header */
+
+    body {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+    }
+
     .header {
-      background: linear-gradient(45deg, #2c3e50, #34495e);
+      background: linear-gradient(45deg, var(--dark-color), #34495e);
       color: #fff;
-      padding: 15px;
+      padding: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       position: relative;
     }
-    .hamburger {
-      font-size: 30px;
-      cursor: pointer;
-      position: absolute;
-      left: 15px;
-      top: 10px;
-    }
-    .header h2 {
-      margin: 0;
-      text-align: center;
-      font-weight: bold;
-    }
-    /* Sidebar menu */
+
     .sidebar {
-      height: 100%;
-      width: 0;
-      position: fixed;
-      z-index: 1050;
-      top: 0;
-      left: 0;
-      background-color: #34495e;
-      overflow-x: hidden;
-      transition: 0.3s;
-      padding-top: 60px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      box-shadow: 4px 0 12px rgba(0,0,0,0.1);
     }
+
     .sidebar a {
-      padding: 10px 15px;
-      text-decoration: none;
-      font-size: 18px;
-      color: #ecf0f1;
-      display: block;
-      transition: 0.3s;
+      color: var(--dark-color);
+      padding: 1rem 1.5rem;
+      margin: 0.5rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
     }
+
     .sidebar a:hover {
-      background-color: #2c3e50;
+      background: var(--primary-color);
+      color: white;
+      transform: translateX(8px);
     }
-    .sidebar .closebtn {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      font-size: 30px;
+
+    .stats-card {
+      background: var(--glass-bg);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
     }
-    /* Main content */
-    .main {
-      margin-left: 0;
-      transition: margin-left 0.3s;
-      padding: 20px;
+
+    .stats-card:hover {
+      transform: translateY(-5px);
     }
-    .stats {
-      margin: 20px 0;
-      text-align: center;
+
+    .stat-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
     }
-    .stats div {
-      display: inline-block;
-      margin: 0 15px;
-      padding: 10px 20px;
-      background: #e67e22;
-      color: #fff;
-      border-radius: 5px;
-      font-size: 18px;
+
+    @keyframes cardEntrance {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .welcome {
-      font-size: 1.2rem;
-      margin-top: 20px;
-      text-align: center;
+
+    .animate-stat {
+      animation: cardEntrance 0.6s cubic-bezier(0.23, 1, 0.32, 1);
     }
   </style>
-  <script>
-    function openNav() {
-      document.getElementById("mySidebar").style.width = "250px";
-      document.getElementById("main").style.marginLeft = "250px";
-    }
-    function closeNav() {
-      document.getElementById("mySidebar").style.width = "0";
-      document.getElementById("main").style.marginLeft= "0";
-    }
-  </script>
 </head>
 <body>
-  <!-- Header with Hamburger Icon -->
   <div class="header">
-    <span class="hamburger" onclick="openNav()"><i class="fas fa-bars"></i></span>
-    <h2>Admin Dashboard</h2>
+    <h2 class="text-center mb-0"><i class="fas fa-user-shield me-2"></i>Admin Dashboard</h2>
   </div>
   
-  <!-- Sidebar Navigation -->
-  <div id="mySidebar" class="sidebar animate__animated">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="${pageContext.request.contextPath}/admin/profile"><i class="fas fa-user-circle"></i> Admin Profile</a>
-    <a href="${pageContext.request.contextPath}/admin/users"><i class="fas fa-users"></i> User Management</a>
-    <a href="${pageContext.request.contextPath}/admin/restaurants"><i class="fas fa-utensils"></i> Restaurant Management</a>
-    <a href="${pageContext.request.contextPath}/admin/delivery"><i class="fas fa-motorcycle"></i> Delivery Agent Management</a>
-  </div>
-  
-  <!-- Main Content Area -->
-  <div id="main" class="main">
-    <div class="stats animate__animated animate__fadeInUp">
-      <div>Total Restaurants: ${totalRestaurants}</div>
-      <div>Total Users: ${totalUsers}</div>
-      <div>Total Delivery Agents: ${totalDeliveryAgents}</div>
+  <!-- Sidebar -->
+  <div id="mySidebar" class="sidebar">
+    <div class="p-3">
+      <a href="${pageContext.request.contextPath}/admin/profile" class="d-block mb-2">
+        <i class="fas fa-user-cog me-2"></i>Profile
+      </a>
+      <a href="${pageContext.request.contextPath}/admin/users" class="d-block mb-2">
+        <i class="fas fa-users me-2"></i>Users
+      </a>
+      <a href="${pageContext.request.contextPath}/admin/restaurants" class="d-block mb-2">
+        <i class="fas fa-utensils me-2"></i>Restaurants
+      </a>
+      <a href="${pageContext.request.contextPath}/admin/delivery" class="d-block">
+        <i class="fas fa-motorcycle me-2"></i>Delivery Agents
+      </a>
     </div>
-    <p class="welcome animate__animated animate__fadeInUp">
-      Welcome to the Admin Dashboard. Use the menu on the left to manage system users, restaurants, and delivery agents.
-    </p>
   </div>
-  
-  <!-- Bootstrap Bundle with Popper -->
+
+  <!-- Main Content -->
+  <div class="container-fluid p-4">
+    <div class="row g-4">
+      <div class="col-md-4 animate-stat">
+        <div class="stats-card">
+          <div class="d-flex align-items-center">
+            <div class="stat-icon bg-primary text-white me-3">
+              <i class="fas fa-utensils"></i>
+            </div>
+            <div>
+              <h3 class="mb-0">${totalRestaurants}</h3>
+              <small class="text-muted">Total Restaurants</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4 animate-stat" style="animation-delay: 0.2s">
+        <div class="stats-card">
+          <div class="d-flex align-items-center">
+            <div class="stat-icon bg-success text-white me-3">
+              <i class="fas fa-users"></i>
+            </div>
+            <div>
+              <h3 class="mb-0">${totalUsers}</h3>
+              <small class="text-muted">Total Users</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 animate-stat" style="animation-delay: 0.4s">
+        <div class="stats-card">
+          <div class="d-flex align-items-center">
+            <div class="stat-icon bg-warning text-white me-3">
+              <i class="fas fa-motorcycle"></i>
+            </div>
+            <div>
+              <h3 class="mb-0">${totalDeliveryAgents}</h3>
+              <small class="text-muted">Delivery Agents</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
