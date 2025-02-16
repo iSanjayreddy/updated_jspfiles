@@ -39,4 +39,97 @@
             transition: all 0.3s ease;
         }
 
-        .form
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 8px rgba(255, 107, 107, 0.2);
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, var(--primary-color), #ff8787);
+            border: none;
+            padding: 12px 0;
+            border-radius: 10px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .error-alert {
+            border-left: 4px solid #dc3545;
+            animation: shake 0.4s ease;
+        }
+
+        @keyframes cardEntrance {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-10px); }
+            40% { transform: translateX(10px); }
+            60% { transform: translateX(-5px); }
+            80% { transform: translateX(5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold" style="color: var(--primary-color);">
+                <i class="fas fa-sign-in-alt me-2"></i>Restaurant Login
+            </h2>
+            <p class="text-muted">Welcome back! Please login to continue</p>
+        </div>
+
+        <c:if test="${not empty error}">
+            <div class="alert error-alert alert-danger d-flex align-items-center" role="alert">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                ${error}
+            </div>
+        </c:if>
+
+        <form action="${pageContext.request.contextPath}/restaurant/login" method="post">
+            <!-- Email Input -->
+            <div class="mb-4">
+                <div class="input-group">
+                    <span class="input-group-text bg-light">
+                        <i class="fas fa-envelope text-primary"></i>
+                    </span>
+                    <input type="email" name="email" class="form-control" 
+                           placeholder="Enter your email" required>
+                </div>
+            </div>
+
+            <!-- Password Input -->
+            <div class="mb-4">
+                <div class="input-group">
+                    <span class="input-group-text bg-light">
+                        <i class="fas fa-lock text-primary"></i>
+                    </span>
+                    <input type="password" name="password" class="form-control" 
+                           placeholder="Enter your password" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn submit-btn text-white w-100">
+                <i class="fas fa-sign-in-alt me-2"></i>Login
+            </button>
+
+            <div class="text-center mt-4">
+                <p class="text-muted">Don't have an account? 
+                    <a href="${pageContext.request.contextPath}/restaurant/register" 
+                       class="text-primary text-decoration-none">
+                       Register Here
+                    </a>
+                </p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
